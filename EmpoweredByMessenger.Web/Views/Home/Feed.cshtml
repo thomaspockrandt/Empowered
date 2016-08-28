@@ -64,6 +64,28 @@
         border-radius: 5px;
         cursor: pointer;
       }
+
+      .banner {
+        margin: 0 0 15px 0;
+        background-color: #f8de2a;
+        padding: 10px;
+      }
+
+      .banner img {
+        width: 75px;
+      }
+
+      .banner span {
+        text-align: right;
+        width: 80%;
+        padding-top: 5px;
+        display: block;
+        float: right;
+      }
+
+      .banner a {
+        color: #333;
+      }
     </style>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
@@ -100,6 +122,19 @@
     </script>
 </head>
 <body>
+    <div class="top">User Report</div>
+    <div class="banner">
+      <img src="https://www.rainn.org/sites/all/themes/rainn/logo.svg" />
+      <span>
+        <a href="tel:800656HOPE">Call 800.656.HOPE</a> or <a href="http://online.rainn.org">Start Chat</a>
+      </span>
+    </div>
+    <div class="actions">
+      <a href="#">Suggest action</a>
+      <a href="#">Review</a>
+      <a hreg="#">Permanently delete</a>
+    </div>
+    <div class="day">Today</div>
     <div id="messages"> 
     </div>
 </body>
