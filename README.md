@@ -3,6 +3,9 @@
 # Empowered by Messenger
 a [CHIMEHACK3 project](http://devpost.com/software/empower-dvyqk3)
 
+## Technology
+Facebook Messenger bot, C#, ASP.NET, Microsoft Azure
+
 ## Inspiration
 Abuse steals a victim's dignity. We want to enable victims to retake control of their lives. According to the United Nations and Amnesty International, 1 in 3 women are victims of physical and/or sexual abuse. However, because a majority of cases go unreported, the actual number of victims is significantly greater. In 2016, women still suffer from economic dependency, cultural discrimination and social isolation. We want to create a tool that provides women a safe way to report domestic abuse without raising suspicion. We believe such a tool will decrease the number of unreported cases and increase perpetrators who’re legally punished.
 
@@ -13,7 +16,7 @@ Empower is a victim empowerment tool. It deconstructs typical paradigms that ena
 Using Facebook's social networks to redirect victims to the ideal NGO/activist/lawyer regarding her case while storing the victim's evidence in a secure location. The NGO can advise victim on how to best utilize the evidence she's accrued on the secure cloud without necessarily exposing the victims identity. Empower helps people bypass politically rigid, misogynistic societies.
 
 ## How we built it
-We developed a Facebook messenger bot based on ASP.net web api and hosted it on the Azure cloud. Messages are then sent to the bot are uploaded onto a secure cloud location. The messages are accessible via Empower’s website. The messages/photos are then presented as a stream of evidence. The final page is a series of uploads. Using the website, the victim can then access her evidence and determine where to send it.
+We developed a Facebook messenger bot based on ASP.NET web api and hosted it on the Microsoft Azure cloud. Messages are then sent to the bot are uploaded onto a secure cloud location. The messages are accessible via Empower’s website. The messages/photos are then presented as a stream of evidence. The final page is a series of uploads. Using the website, the victim can then access her evidence and determine where to send it.
 
 ## Challenges we ran into
 Empower’s initial dilemma was pinpointing a specific and efficient ‘how’ to solving such a broad dilemma. We determined we must first give a victim a feeling of safety. We believe safety enables a victim's opening up to report a crime. Once she reports the crime, she takes the first crucial step in reclaiming her life. Consequently, she's empowered.
