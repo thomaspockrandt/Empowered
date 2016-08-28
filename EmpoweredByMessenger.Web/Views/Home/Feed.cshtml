@@ -1,0 +1,50 @@
+﻿@model System.Collections.Generic.List<System.Uri>
+@{
+    this.Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Feed</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        var data = [
+            @for(int i = 0; i < Model.Count(); i++)
+            {
+                @Html.Raw((i > 0 ? ", " : string.Empty) + ("\"" + Model[i].AbsoluteUri + "\""));
+            }
+        ];
+        $(document).ready(function() {
+            $.each(data, function(k, v) {
+                //console.log("k: " + k + ", v: " + v);
+                $.ajax({
+                    url: v,
+                    success: function (content) {
+                        if (content.indexOf(".jpg") > 0 || content.indexOf(".gif") > 0) {
+                            $("#messages").prepend("<div><img src=\"" + content + "\" style=\"width:320px;\" /></div>");
+                        }
+                        else if (content.indexOf(".aac") > 0) {
+                            $("#messages").prepend("<audio controls><source src=\"" + content + "\" type=\"audio/aac\"></audio>");
+                        }
+                        else if (content.indexOf(".mp4") > 0) {
+                            $("#messages").prepend("<video width=\"320\" height=\"240\" controls><source src=\"" + content + "\" type=\"video/mp4\"></video>");
+                        }
+                        else {
+                            $("#messages").prepend("<div>" + content + "</div>");
+                        }
+                    }
+                });
+
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div id="messages">
+    
+</div>
+</body>
+</html>
