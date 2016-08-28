@@ -61,7 +61,7 @@ namespace EmpoweredByMessenger.Web.Controllers
                     await Task.Factory.StartNew(async () =>
                     {
                         await Task
-                            .Delay(TimeSpan.FromSeconds(15))
+                            .Delay(TimeSpan.FromSeconds(5))
                             .ContinueWith(async x =>
                             {
                                 await SendMessage(GetMessageTemplate("Your NGO reviewed you files and would like to get in touch.", item.sender.id));
