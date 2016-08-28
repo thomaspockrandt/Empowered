@@ -66,6 +66,8 @@ namespace EmpoweredByMessenger.Web.Controllers
                             {
                                 await SendMessage(GetMessageTemplate("Your NGO reviewed you files and would like to get in touch.", item.sender.id));
                                 await SendMessage(GetImageMessageTemplate("http://empoweredbymessenger.azurewebsites.net/images/rainn.jpg", item.sender.id));
+                                await SendMessage(GetMessageTemplate("Remember, you can stay annonymous and still get help.", item.sender.id));
+                                await SendMessage(GetMessageTemplate("Here is your report: http://empoweredbymessenger.azurewebsites.net/home/feed", item.sender.id));
                             });
                     });
                 }
