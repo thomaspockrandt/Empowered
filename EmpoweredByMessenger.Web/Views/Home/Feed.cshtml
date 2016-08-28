@@ -8,6 +8,63 @@
 <html>
 <head>
     <title>Feed</title>
+    <style type="text/css">
+      body {
+        background-color: #f5f6f8;
+        font-size: 17px;
+        font-weight: 400;
+        font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
+      }
+
+      .day {
+        margin: 15px 0 5px 0;
+      }
+
+      .top {
+        color: #fff;
+        background-color: #3b5998;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+
+      .message {
+        padding: 10px;
+        color: #000;
+        margin-bottom: 10px;
+      }
+
+      .message.text {
+        background-color: #dfe3ee;
+      }
+
+      .message.image {
+        background-color: #fff;
+      }
+
+      .message.audio {
+        background-color: #dfe3ee;
+      }
+
+      .message.video {
+        background-color: #fff;
+      }
+
+      .message img {
+        width: 40%;
+        min-width: 340px;
+      }
+
+      .actions a {
+        margin-right: 5px;
+        background-color: #8b9dc3;
+        color: #fff;
+        padding: 5px;
+        font-size: 14px;
+        text-decoration: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
         var data = [
@@ -23,16 +80,16 @@
                     url: v,
                     success: function (content) {
                         if (content.indexOf(".jpg") > 0 || content.indexOf(".gif") > 0) {
-                            $("#messages").prepend("<div><img src=\"" + content + "\" style=\"width:320px;\" /></div>");
+                            $("#messages").prepend("<div class=\"message image\"><span>Image sent:</span><br><img src=\"" + content + "\" style=\"width:320px;\" /></div>");
                         }
                         else if (content.indexOf(".aac") > 0) {
-                            $("#messages").prepend("<audio controls><source src=\"" + content + "\" type=\"audio/aac\"></audio>");
+                            $("#messages").prepend("<div class=\"message audio\"><span>Audio sent:</span><br><audio controls><source src=\"" + content + "\" type=\"audio/aac\"></audio></div>");
                         }
                         else if (content.indexOf(".mp4") > 0) {
-                            $("#messages").prepend("<video width=\"320\" height=\"240\" controls><source src=\"" + content + "\" type=\"video/mp4\"></video>");
+                            $("#messages").prepend("<div class=\"message video\"><span>Video sent:</span><br><video width=\"320\" height=\"240\" controls><source src=\"" + content + "\" type=\"video/mp4\"></video></div>");
                         }
                         else {
-                            $("#messages").prepend("<div>" + content + "</div>");
+                            $("#messages").prepend("<div class=\"message text\"><span>Message sent:</span><br>" + content + "</div>");
                         }
                     }
                 });
@@ -43,8 +100,7 @@
     </script>
 </head>
 <body>
-<div id="messages">
-    
-</div>
+    <div id="messages"> 
+    </div>
 </body>
 </html>
