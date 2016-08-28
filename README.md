@@ -4,7 +4,7 @@
 a [CHIMEHACK3 project](http://devpost.com/software/empower-dvyqk3)
 
 ## Technology
-Facebook Messenger bot, C#, ASP.NET, Microsoft Azure
+A Facebook Messenger bot based on C# and ASP.NET hosted on Microsoft Azure.
 
 ## Inspiration
 Abuse steals a victim's dignity. We want to enable victims to retake control of their lives. According to the United Nations and Amnesty International, 1 in 3 women are victims of physical and/or sexual abuse. However, because a majority of cases go unreported, the actual number of victims is significantly greater. In 2016, women still suffer from economic dependency, cultural discrimination and social isolation. We want to create a tool that provides women a safe way to report domestic abuse without raising suspicion. We believe such a tool will decrease the number of unreported cases and increase perpetrators who’re legally punished.
