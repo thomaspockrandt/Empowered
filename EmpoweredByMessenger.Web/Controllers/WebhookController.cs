@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -36,17 +37,50 @@ namespace EmpoweredByMessenger.Web.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> Post([FromBody]WebhookModel value)
         {
+            var comparison = StringComparison.InvariantCultureIgnoreCase;
+
             if (value._object != "page")
                 return new HttpResponseMessage(HttpStatusCode.OK);
 
             foreach (var item in value.entry[0].messaging)
             {
-                if (item.message == null && item.postback == null)
-                    continue;
+                if (item.message == null && item.postback == null) continue;
+
+                if (item?.message?.text?.IndexOf("hi", comparison) > -1 ||
+                    item?.message?.text?.IndexOf("hello", comparison) > -1)
+                {
+                    var message = "Hello 🙂 Tell me your story and let me know if you want someone to have a look 📋";
+                    await SendMessage(GetMessageTemplate(message, item.sender.id));
+                }
+                else if (item?.message?.text?.IndexOf("review", comparison) > -1 ||
+                    item?.message?.text?.IndexOf("have a look", comparison) > -1)
+                {
+                    var message = "Ok, I will contact the support network. Don't worry, you will stay annonymous.";
+                    await SendMessage(GetMessageTemplate(message, item.sender.id));
+                    //message = "Ok, I will contact the support network. Don't worry, you will stay annonymous.";
+                    //await SendMessage(GetMessageTemplate(message, item.sender.id));
+                }
                 else
                 {
                     UploadMessageToBlobStorage(item);
-                    await SendMessage(GetMessageTemplate(item.message.text, item.sender.id));
+                    if (!string.IsNullOrEmpty(item.message?.text))
+                    {
+                        if (DateTime.Now.Second % 5 == 0)
+                            await SendMessage(GetMessageTemplate("I understand, please feel free share more.", item.sender.id));
+                    }
+                    else if (DateTime.Now.Second % 4 == 0)
+                        await SendMessage(GetMessageTemplate("Got it, it's safe.", item.sender.id));
+                    else if (DateTime.Now.Second % 3 == 0)
+                        await SendMessage(GetMessageTemplate("Received and stored.", item.sender.id));
+                    else
+                        await SendMessage(GetMessageTemplate("Thanks, added.", item.sender.id));
+                }
+
+                if (item?.message?.text?.IndexOf("thanks", comparison) > -1 ||
+                    item?.message?.text?.IndexOf("thx", comparison) > -1)
+                {
+                    var message = "No worries 🙂";
+                    await SendMessage(GetMessageTemplate(message, item.sender.id));
                 }
             }
 
@@ -76,11 +110,11 @@ namespace EmpoweredByMessenger.Web.Controllers
             serviceProperties.Cors = new CorsProperties();
             serviceProperties.Cors.CorsRules.Add(new CorsRule()
             {
-                AllowedHeaders = new List<string>() { "*" },
+                AllowedHeaders = new List<string> { "*" },
                 AllowedMethods = CorsHttpMethods.Put | CorsHttpMethods.Get | CorsHttpMethods.Head | CorsHttpMethods.Post,
-                AllowedOrigins = new List<string>() { "*" },
-                ExposedHeaders = new List<string>() { "*" },
-                MaxAgeInSeconds = 600 // 30 minutes
+                AllowedOrigins = new List<string> { "*" },
+                ExposedHeaders = new List<string> { "*" },
+                MaxAgeInSeconds = 600
             });
             blobClient.SetServiceProperties(serviceProperties);
         }
@@ -109,7 +143,7 @@ namespace EmpoweredByMessenger.Web.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await client.PostAsync($"https://graph.facebook.com/v2.6/me/messages?access_token={pageToken}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
+                var res = await client.PostAsync($"https://graph.facebook.com/v2.6/me/messages?access_token={pageToken}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
             }
         }
     }
