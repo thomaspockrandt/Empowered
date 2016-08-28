@@ -55,10 +55,19 @@ namespace EmpoweredByMessenger.Web.Controllers
                 else if (item?.message?.text?.IndexOf("review", comparison) > -1 ||
                     item?.message?.text?.IndexOf("have a look", comparison) > -1)
                 {
-                    var message = "Ok, I will contact the support network. Don't worry, you will stay annonymous.";
+                    var message = "Of course, I will contact the support network. Don't worry, you will stay annonymous.";
                     await SendMessage(GetMessageTemplate(message, item.sender.id));
-                    //message = "Ok, I will contact the support network. Don't worry, you will stay annonymous.";
-                    //await SendMessage(GetMessageTemplate(message, item.sender.id));
+
+                    await Task.Factory.StartNew(async () =>
+                    {
+                        await Task
+                            .Delay(TimeSpan.FromSeconds(15))
+                            .ContinueWith(async x =>
+                            {
+                                await SendMessage(GetMessageTemplate("Your NGO reviewed you files and would like to get in touch.", item.sender.id));
+                                await SendMessage(GetImageMessageTemplate("http://empoweredbymessenger.azurewebsites.net/images/rainn.jpg", item.sender.id));
+                            });
+                    });
                 }
                 else
                 {
@@ -134,6 +143,15 @@ namespace EmpoweredByMessenger.Web.Controllers
             });
         }
 
+        private JObject GetImageMessageTemplate(string imageUrl, string sender)
+        {
+            return JObject.FromObject(new
+            {
+                recipient = new { id = sender },
+                message = new { attachment = new { type = "image", payload = new { url = imageUrl } } }
+            });
+        }
+        
         /// <summary>
         /// send message
         /// </summary>

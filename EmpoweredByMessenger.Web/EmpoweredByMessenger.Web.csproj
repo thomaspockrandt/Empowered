@@ -210,6 +210,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\rainn.jpg" />
     <Content Include="Images\small-logo.png" />
     <Content Include="Images\logo.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
